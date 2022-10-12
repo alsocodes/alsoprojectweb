@@ -1,0 +1,8 @@
+.myhero {
+  background: rgb(241, 236, 245);
+  background: linear-gradient(
+    171deg,
+    rgba(241, 236, 245, 1) 0%,
+    rgba(0, 203, 169, 0.4948354341736695) 93%
+  );
+}

@@ -1,0 +1,17 @@
+.mybg {
+  /* background: rgb(174, 238, 191);
+  background: linear-gradient(
+    151deg,
+    rgba(174, 238, 191, 1) 0%,
+    rgba(181, 204, 220, 1) 57%,
+    rgba(148, 209, 233, 1) 100%
+  ); */
+
+  background: rgb(174, 238, 191);
+  background: linear-gradient(
+    9deg,
+    rgba(174, 238, 191, 1) 0%,
+    rgba(181, 204, 220, 1) 57%,
+    rgba(148, 209, 233, 1) 100%
+  );
+}

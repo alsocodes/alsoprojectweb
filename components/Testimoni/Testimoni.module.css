@@ -1,0 +1,8 @@
+.mybg {
+  background: rgb(193, 240, 219);
+  background: linear-gradient(
+    9deg,
+    rgba(193, 240, 219, 1) 0%,
+    rgba(244, 247, 247, 1) 100%
+  );
+}
