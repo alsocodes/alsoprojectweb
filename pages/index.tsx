@@ -15,7 +15,7 @@ import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   return (
-    <Landing>
+    <Landing data={{title: "AlsoProject | Solusi pembuatan website, aplikasi, mobile app, ecommerce, dan web company profile"}}>
       <Navbar2 />
       <Hero />
       <About />
