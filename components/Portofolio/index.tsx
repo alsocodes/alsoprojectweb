@@ -74,7 +74,7 @@ const Portofolio = () => {
         <div className='flex flex-wrap -m-1 md:-m-2'>
           {portofolios?.map((a) => {
             return (
-              <div className='flex flex-wrap w-1/2 sm:w-1/3'>
+              <div className='flex flex-wrap w-1/2 sm:w-1/3' key={a?.title}>
                 <div
                   className='w-full p-2 md:p-4'
                   data-aos='zoom-out'
