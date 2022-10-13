@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useState } from 'react';
 import styles from './Portofolio.module.css';
 
@@ -76,7 +77,7 @@ const Portofolio = () => {
             return (
               <div className='flex flex-wrap w-1/2 sm:w-1/3' key={a?.title}>
                 <div
-                  className='w-full p-2 md:p-4'
+                  className='w-full p-2 md:p-4 h-eqw'
                   data-aos='zoom-out'
                   data-aos-once='true'
                   data-aos-delay='200'
@@ -85,10 +86,18 @@ const Portofolio = () => {
                     onClick={() => setModalData(a)}
                     className='relative w-full h-full group cursor-pointer overflow-hidden rounded-lg'
                   >
-                    <img
+                    {/* <img
                       alt={a?.title}
                       className='block object-cover object-center w-full h-full group-hover:scale-125 transition-all duration-500'
                       src={a?.image}
+                    /> */}
+                    <Image
+                      src={a?.image}
+                      alt={a?.title}
+                      width={300}
+                      height={300}
+                      layout='responsive'
+                      objectFit='cover'
                     />
                     <h4
                       className='absolute bg-black bg-opacity-70 
@@ -129,7 +138,7 @@ const Portofolio = () => {
             ✕
           </label>
           <h3 className='text-lg font-bold'>{modalData?.title}</h3>
-          <div>
+          <div className=''>
             <img
               src={modalData?.imageFull}
               alt={modalData?.title}
