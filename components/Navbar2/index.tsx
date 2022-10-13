@@ -44,9 +44,17 @@ const Navbar2 = () => {
     >
       <div className='navbar justify-between px-4 md:px-10'>
         <div className='navbar-start'>
-          <div className='relative w-36 h-12'>
-            <Image src='/images/logo-1.png' layout='fill' objectFit='cover' />
-          </div>
+          <Link href={'/'}>
+            <a>
+              <div className='relative w-36 h-12 cursor-pointer'>
+                <Image
+                  src='/images/logo-1.png'
+                  layout='fill'
+                  objectFit='cover'
+                />
+              </div>
+            </a>
+          </Link>
           {/* <a className='btn btn-ghost normal-case text-xl'>daisyUI</a> */}
         </div>
 

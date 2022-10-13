@@ -109,6 +109,7 @@ const Portofolio = () => {
         id='my-modal-4'
         className='modal-toggle'
         checked={!!modalData}
+        readOnly
       />
       <div
         id='modal'
