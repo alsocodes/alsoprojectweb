@@ -1,0 +1,1 @@
+{"c":["webpack"],"r":["pages/admin"],"m":["./components/AdminNavbar/index.tsx","./components/AdminSidebar/index.tsx","./components/layout/Admin/index.tsx","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=%2FUsers%2Falsocodes%2FProject%2Falsoproject-web%2Falso%2Fpages%2Fadmin%2Findex.tsx&page=%2Fadmin!","./pages/admin/index.tsx"]}
