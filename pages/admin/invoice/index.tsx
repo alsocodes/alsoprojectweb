@@ -684,7 +684,7 @@ const Invoice = () => {
                     <tbody>
                       {formData?.items?.map((a: any, index: number) => {
                         return (
-                          <tr className={`tr-${index} align-top`}>
+                          <tr key={index} className={`tr-${index} align-top`}>
                             <td className='whitespace-pre-line'>
                               {a?.description}
                               <br /> {a?.periodTerm}:{' '}
