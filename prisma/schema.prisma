@@ -169,38 +169,3 @@ model InvoiceItem {
   updatedAt   DateTime   @updatedAt
   deletedAt   DateTime?
 }
-
-model BlogCategory {
-  id  String     @id @default(auto()) @map("_id") @db.ObjectId
-  parentId   String     @db.ObjectId
-  parent     BlogCategory    @relation("parent",fields: [parentId], references: [id])
-  childs  BlogCategory[]    @relation("childs")
-  name         String   @unique
-  slug         String   @unique
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  deletedAt   DateTime?
-}
-
-enum StatusPost {
-  DRAFT
-  PUBLISH
-  UNPUBLISH
-}
-
-model BlogPost {
-  id  String     @id @default(auto()) @map("_id") @db.ObjectId
-  blogCategory     BlogCategory    @relation(fields: [blogCategoryId], references: [id])
-  blogCategoryId   String     @db.ObjectId
-  author    User   @relation(fields: [authorId], references: [id])
-  authorId  String
-  name         String   @unique
-  slug         String   @unique
-  content String
-  thumbnail String
-  status StatusPost @default(DRAFT)
-  publishAt   DateTime?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  deletedAt   DateTime?
-}
