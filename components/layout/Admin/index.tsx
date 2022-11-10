@@ -1,10 +1,28 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminNavbar from '../../AdminNavbar';
 import AdminSidebar from '../../AdminSidebar';
+import AlsoModal from '../../AlsoModal';
 import Hero from '../../Hero';
 
 const AdminLayout = ({ data, children }) => {
+  const [toggle, setToggle] = useState(false);
+  const onDraweClick = (e) => {
+    console.log();
+    if (e.target.classList.contains('drawer-overlay')) setToggle(false);
+  };
+
+  const [classToggle, setClassToggle] = useState('z-0');
+  useEffect(() => {
+    if (toggle) setClassToggle('z-10');
+    else {
+      const to = setTimeout(() => {
+        setClassToggle('z-0');
+      }, 500);
+      return () => clearTimeout(to);
+    }
+  }, [toggle]);
+
   return (
     <div data-theme='emerald'>
       <Head>
@@ -20,16 +38,23 @@ const AdminLayout = ({ data, children }) => {
       </Head>
       <main>
         <div className='bg-base-100 drawer drawer-mobile'>
-          <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
-          <div className='drawer-content flex flex-col items-center justify-center'>
-            {/* <!-- Page content here --> */}
-
-            <AdminNavbar />
-            <div className='w-full p-6 mt-20'>{children}</div>
-          </div>
-          <div className='drawer-side'>
+          <input
+            id='my-drawer-2'
+            type='checkbox'
+            className='drawer-toggle'
+            checked={toggle}
+            readOnly
+          />
+          <div
+            className={`drawer-side ${classToggle}`}
+            onClick={(e) => onDraweClick(e)}
+          >
             <label htmlFor='my-drawer-2' className='drawer-overlay'></label>
-            <AdminSidebar />
+            <AdminSidebar page={data?.page} />
+          </div>
+          <div className='drawer-content flex flex-col items-center justify-center'>
+            <AdminNavbar setToggle={setToggle} />
+            <div className='w-full h-full p-6'>{children}</div>
           </div>
         </div>
       </main>

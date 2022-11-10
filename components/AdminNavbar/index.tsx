@@ -1,12 +1,13 @@
 import React from 'react';
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ setToggle }) => {
   return (
     <div className='sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content'>
       <div className='navbar bg-base-100 shadow-sm'>
         <div className='flex-1'>
           {/* <a className='btn btn-ghost normal-case text-xl'>AlsoProject</a> */}
           <label
+            onClick={() => setToggle(true)}
             htmlFor='my-drawer-2'
             className='btn drawer-button btn-square btn-ghost lg:hidden'
           >

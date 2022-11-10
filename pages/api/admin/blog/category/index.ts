@@ -1,14 +1,14 @@
-import prisma from '../../../lib/prisma';
+import prisma from '../../../../../lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   ErrorResponse,
   invalidResponse,
   successResponse,
-} from '../../../lib/helper';
+} from '../../../../../lib/helper';
 import {
   NotfoundException,
   UniqueConstraintsException,
-} from '../../../lib/exceptions';
+} from '../../../../../lib/exceptions';
 
 export default async function handle(
   req: NextApiRequest,
@@ -35,11 +35,7 @@ export default async function handle(
           filter = { [key]: { contains: value } };
         }
 
-        const getData = await get({
-          skip,
-          take,
-          filter,
-        });
+        const getData = await get({ skip, take, filter });
         const result = {
           count: getData[0],
           page: parseInt(page),
@@ -66,28 +62,11 @@ export default async function handle(
 const get = async (data: any) => {
   try {
     const { skip, take, filter } = data;
+    console.log('yaya', filter, skip, take);
     const where = { ...filter };
     const result = await prisma.$transaction([
-      prisma.service.count({ where }),
-      prisma.service.findMany({
-        select: {
-          id: true,
-          name: true,
-          description: true,
-          amount: true,
-          status: true,
-          date: true,
-          activeTill: true,
-          periodTerm: true,
-          createdAt: true,
-          updatedAt: true,
-          client: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-        },
+      prisma.client.count({ where }),
+      prisma.client.findMany({
         where: where,
         skip,
         take,
@@ -103,41 +82,60 @@ const get = async (data: any) => {
 
 const create = async (data: any) => {
   try {
-    const {
-      name,
-      description,
-      periodTerm,
-      date,
-      amount,
-      status,
-      clientId,
-    }: any = data;
+    const { email, name, address, phone, picName, picPhone } = data;
 
-    const checkClient = await prisma.client.findFirst({
-      where: { id: clientId },
+    const checkEmail = await prisma.client.findUnique({
+      where: { email: email },
     });
 
-    if (!checkClient) throw new NotfoundException('Client tidak ditemukan');
+    if (checkEmail)
+      throw new UniqueConstraintsException(`Email ${email} sudah digunakan`);
 
-    const checkName = await prisma.service.findFirst({
-      where: { name: name },
-    });
-
-    if (checkName)
-      throw new UniqueConstraintsException(
-        `Nama layanan ${name} sudah digunakan`
-      );
-
-    const result = await prisma.service.create({
+    const result = await prisma.client.create({
       data: {
+        email: email,
         name: name,
-        description: description,
-        periodTerm: periodTerm,
-        date: date,
-        activeTill: null,
-        amount: parseFloat(amount),
-        clientId: clientId,
-        status: status,
+        address: address,
+        phone: phone,
+        picName: picName,
+        picPhone: picPhone,
+        deletedAt: null,
+      },
+    });
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const update = async (id: string, data: any) => {
+  try {
+    const { email, name, address, phone, picName, picPhone } = data;
+
+    const client = await prisma.client.findUnique({ where: { id: id } });
+    if (!client) throw new NotfoundException('Client tidak ditemukan');
+
+    const checkEmail = await prisma.client.findUnique({
+      where: { email: email },
+    });
+
+    if (checkEmail && checkEmail?.id !== client?.id)
+      throw new UniqueConstraintsException(`Email ${email} sudah digunakan`);
+
+    const result = await prisma.client.update({
+      where: {
+        id: client?.id,
+      },
+      data: {
+        email: email,
+        name: name,
+        address: address,
+        phone: phone,
+        picName: picName,
+        picPhone: picPhone,
+        deletedAt: null,
       },
     });
 

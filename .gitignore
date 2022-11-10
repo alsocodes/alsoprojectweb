@@ -4,3 +4,7 @@ node_modules/
 build/
 tmp/
 temp/
+.next/
+data/
+mongodb-osx-ssl-x86_64-4.0.12.tgz
+.DS_Store
