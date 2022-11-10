@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { createRef, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AlsoTable from '../../../components/AlsoTable';
 import AdminLayout from '../../../components/layout/Admin';
 import apiCall from '../../../lib/apicall';
@@ -268,7 +268,8 @@ const Invoice = () => {
     });
   };
 
-  const pdfRef = createRef();
+  // const pdfRef = createRef();
+  const pdfRef = useRef<HTMLDivElement>(null);
 
   return (
     <AdminLayout
